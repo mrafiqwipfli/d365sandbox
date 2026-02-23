@@ -33,7 +33,7 @@ permissions:
 jobs:
   export-from-dev:
     runs-on: windows-latest
-    timeout-minutes: 30
+    timeout-minutes: 360
 
     # or you can say runs-on: ubuntu-latest
     env:
@@ -64,7 +64,7 @@ jobs:
         tenant-id: ${{env.TENANT_ID}}
         solution-name: ${{ github.event.inputs.solution_name }}
         solution-output-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
-        timeout-minutes: 60
+        timeout: 360
 
     - name: unpack-solution action
       uses: microsoft/powerplatform-actions/unpack-solution@v0
