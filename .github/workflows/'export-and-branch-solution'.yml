@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       # Change this value
-      solution_name: 'ResumeParser'
-        description: 'Resume Parser'
+      solution_name: 
+        description: 'ResumeParser'
         required: true
         default: ALMLab
        #Do Not change these values
