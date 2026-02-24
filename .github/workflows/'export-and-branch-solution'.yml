@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       # Change this value
-      solution_name: 
-        description: 'unique Name of solution'
+      solution_name:
+        description: 'name of the solution to worked on from Power Platform'
         required: true
         default: ALMLab
        #Do Not change these values
@@ -25,7 +25,7 @@ on:
        default: solutions/
 env:
 #edit your values here
-  ENVIRONMENT_URL: 'https://wipfliacceleratordev.crm.dynamics.com'
+  ENVIRONMENT_URL: 'https://wipflinfptest.crm.dynamics.com'
   CLIENT_ID: 'c3b2eb5e-f1b0-472f-84e1-98370ccc341d'
   TENANT_ID: '41cbb242-7069-49d5-a0f4-b620d0539058'
 permissions:
@@ -33,11 +33,11 @@ permissions:
 jobs:
   export-from-dev:
     runs-on: windows-latest
-    timeout-minutes: 360
-
     # or you can say runs-on: ubuntu-latest
+    timeout-minutes: 360
     env:
       RUNNER_DEBUG: 1
+      ACTIONS_STEP_DEBUG: true
 
     steps:
     - uses: actions/checkout@v2
@@ -45,9 +45,9 @@ jobs:
         lfs: true
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
-     
     - name: who-am-i action
-      uses: microsoft/powerplatform-actions/who-am-i@v1
+      uses: microsoft/powerplatform-actions/who-am-i@v1  # Try v1 or later
+
       with:
         environment-url: ${{env.ENVIRONMENT_URL}}
         app-id: ${{env.CLIENT_ID}}
@@ -64,10 +64,10 @@ jobs:
         tenant-id: ${{env.TENANT_ID}}
         solution-name: ${{ github.event.inputs.solution_name }}
         solution-output-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
-        timeout: 360
-
+        timeout: 120
+  
     - name: unpack-solution action
-      uses: microsoft/powerplatform-actions/unpack-solution@v0
+      uses: microsoft/powerplatform-actions/unpack-solution@v1
       with:
         solution-file: ${{ github.event.inputs.solution_exported_folder}}/${{ github.event.inputs.solution_name }}.zip
         solution-folder: ${{ github.event.inputs.solution_folder}}/${{ github.event.inputs.solution_name }}
@@ -75,9 +75,10 @@ jobs:
         overwrite-files: true
 
     - name: branch-solution, prepare it for a PullRequest
-      uses: microsoft/powerplatform-actions/branch-solution@v0
+      uses: microsoft/powerplatform-actions/branch-solution@v1
       with:
         solution-folder: ${{ github.event.inputs.solution_folder}}/${{ github.event.inputs.solution_name }}
         solution-target-folder: ${{ github.event.inputs.solution_target_folder}}/${{ github.event.inputs.solution_name }}
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         allow-empty-commit: true
+        commit-message: "Solution export: ${{ github.event.inputs.solution_name }}"
