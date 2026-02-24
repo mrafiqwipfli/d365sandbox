@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_wipfli_gittable" />
+  <EntityRelationship Name="lk_wipfli_gittable_createdby" />
+  <EntityRelationship Name="lk_wipfli_gittable_modifiedby" />
+  <EntityRelationship Name="owner_wipfli_gittable" />
+  <EntityRelationship Name="team_wipfli_gittable" />
+  <EntityRelationship Name="user_wipfli_gittable" />
+</EntityRelationships>

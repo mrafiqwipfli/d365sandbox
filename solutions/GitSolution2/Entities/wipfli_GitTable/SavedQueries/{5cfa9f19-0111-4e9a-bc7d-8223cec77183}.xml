@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{5cfa9f19-0111-4e9a-bc7d-8223cec77183}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="wipfli_newcolumn" select="1" icon="1" preview="1">
+        <row name="result" id="wipfli_gittableid">
+          <cell name="wipfli_newcolumn" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="wipfli_gittable">
+          <attribute name="wipfli_gittableid" />
+          <attribute name="wipfli_newcolumn" />
+          <attribute name="createdon" />
+          <order attribute="wipfli_newcolumn" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Git Tables" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>
